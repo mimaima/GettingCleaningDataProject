@@ -3,7 +3,7 @@ Getting-and-Cleaning-Data-Project
 
 One of the most exciting areas in all of data science right now is wearable computing.Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users.
 
-This repository includes:
+This repository includes:/h
 a .R file (R script) named on run_Analysis.R 
 a .md file (codebook) named on CodeBook.md
 

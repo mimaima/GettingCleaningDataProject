@@ -26,9 +26,9 @@ S <- rbind(Strn, Stst)
 Y <- rbind(Ytrn, Ytst)
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
-indices_of_good_features <- grep("-mean\\(\\)|-std\\(\\)", features[, 2])
-X <- X[, indices_of_good_features]
-names(X) <- features[indices_of_good_features, 2]
+t_features <- grep("-mean\\(\\)|-std\\(\\)", features[, 2])
+X <- X[, t_features]
+names(X) <- features[t_features, 2]
 names(X) <- gsub("\\(|\\)", "", names(X))
 names(X) <- tolower(names(X)) 
 
@@ -39,18 +39,18 @@ names(Y) <- "activity"
 # 4. Appropriately labels the data set with descriptive activity names. 
 names(S) <- "subject"
 cleaned <- cbind(S, Y, X)
-write.table(cleaned, "merged_clean_data.txt")
+
 # 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-uniqueSubjects = unique(S)[,1]
-numSubjects = length(unique(S)[,1])
-numActivities = length(activities[,1])
+uniqueSub = unique(S)[,1]
+numSub = length(unique(S)[,1])
+numAct = length(activities[,1])
 numCols = dim(cleaned)[2]
 result = cleaned[1:(numSubjects*numActivities), ]
 
 row = 1
-for (s in 1:numSubjects) {
-	for (a in 1:numActivities) {
-		result[row, 1] = uniqueSubjects[s]
+for (s in 1:numSub) {
+	for (a in 1:numAct) {
+		result[row, 1] = uniqueSub[s]
 		result[row, 2] = activities[a, 2]
 		tmp <- cleaned[cleaned$subject==s & cleaned$activity==activities[a, 2], ]
 		result[row, 3:numCols] <- colMeans(tmp[, 3:numCols])

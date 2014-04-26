@@ -8,3 +8,8 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 
 ### assuming that the folder /UCI HAR Dataset was downloaded, unzipped, and stored locally.
 
+all the downloaded files were bounded to each other in Rstudio, 
+a full data set included 563 columns and 10229 rows. 
+
+Fixed some unusual features related to the variable names such as (), -, etc. 
+

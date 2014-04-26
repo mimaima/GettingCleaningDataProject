@@ -1,33 +1,38 @@
 # Source of data for the project:
 # https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
-# assuming that the folder "/UCI HAR Dataset" was downloaded, unzipped, and stored locally. 
 
+# assuming that the folder "/UCI HAR Dataset" was downloaded, unzipped, and stored locally. 
 #  check that the current directory contains the desired data file
 if(!is.element("UCI HAR Dataset",list.files()))
    print('Cannot find data file.')
+
+Stst <- read.table("UCI HAR Dataset/test/subject_test.txt")
+Strn <- read.table("UCI HAR Dataset/train/subject_train.txt")
+
+Xtst<- read.table("UCI HAR Dataset/test/X_test.txt")
+Xtrn<- read.table("UCI HAR Dataset/train/X_train.txt")
+
+Ytst<- read.table("UCI HAR Dataset/test/y_test.txt")
+Ytrn<- read.table("UCI HAR Dataset/train/y_train.txt")
+
+activities<- read.table("UCI HAR Dataset/activity_labels.txt")
+features <- read.table("UCI HAR Dataset/features.txt") 
    
 # This R script does the following:
+
 # 1. Merges the training and the test sets to create one data set
-tmp1 <- read.table("train/X_train.txt")
-tmp2 <- read.table("test/X_test.txt")
-X <- rbind(tmp1, tmp2)
+X <- rbind(Xtrn, Xtst)
+S <- rbind(Strn, Stst)
+Y <- rbind(Ytrn, Ytst)
 
-tmp1 <- read.table("train/subject_train.txt")
-tmp2 <- read.table("test/subject_test.txt")
-S <- rbind(tmp1, tmp2)
-
-tmp1 <- read.table("train/y_train.txt")
-tmp2 <- read.table("test/y_test.txt")
-Y <- rbind(tmp1, tmp2)
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
-features <- read.table("features.txt")
 indices_of_good_features <- grep("-mean\\(\\)|-std\\(\\)", features[, 2])
 X <- X[, indices_of_good_features]
 names(X) <- features[indices_of_good_features, 2]
 names(X) <- gsub("\\(|\\)", "", names(X))
 names(X) <- tolower(names(X)) 
+
 # 3. Uses descriptive activity names to name the activities in the data set
-activities <- read.table("activity_labels.txt")
 activities[, 2] = gsub("_", "", tolower(as.character(activities[, 2])))
 Y[,1] = activities[Y[,1], 2]
 names(Y) <- "activity"

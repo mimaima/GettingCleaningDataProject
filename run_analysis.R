@@ -38,23 +38,23 @@ Y[,1] = activities[Y[,1], 2]
 names(Y) <- "activity"
 # 4. Appropriately labels the data set with descriptive activity names. 
 names(S) <- "subject"
-cleaned <- cbind(S, Y, X)
+NewData <- cbind(S, Y, X)
 
 # 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 uniqueSub = unique(S)[,1]
 numSub = length(unique(S)[,1])
 numAct = length(activities[,1])
-numCols = dim(cleaned)[2]
-result = cleaned[1:(numSubjects*numActivities), ]
+numCols = dim(NewData)[2]
+final = NewData[1:(numSub*numAct), ]
 
 row = 1
 for (s in 1:numSub) {
 	for (a in 1:numAct) {
-		result[row, 1] = uniqueSub[s]
-		result[row, 2] = activities[a, 2]
-		tmp <- cleaned[cleaned$subject==s & cleaned$activity==activities[a, 2], ]
-		result[row, 3:numCols] <- colMeans(tmp[, 3:numCols])
+		final[row, 1] = uniqueSub[s]
+		final[row, 2] = activities[a, 2]
+		tmp <- NewData[NewData$subject==s & NewData$activity==activities[a, 2], ]
+		final[row, 3:numCols] <- colMeans(tmp[, 3:numCols])
 		row = row+1
 	}
 }
-write.table(result, "TidyDataSet_Average.txt")
+write.table(final, "TidyDataSet_Average.txt")

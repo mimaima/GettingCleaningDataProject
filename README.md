@@ -20,3 +20,5 @@ One of the most exciting areas in all of data science right now is wearable comp
 </ul>
 
 <p>the code book <strong> CodeBook.md </strong>describes the variables, the data, and any transformations or work performed to clean up the data</p>
+
+[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012

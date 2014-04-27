@@ -32,13 +32,14 @@ names(X) <- features[t_features, 2]
 names(X) <- gsub("\\(|\\)", "", names(X))
 names(X) <- tolower(names(X)) 
 
-# 4. Uses descriptive activity names to name the activities in the data set and appropriately labels the data set with descriptive activity names.
+# 4. Uses descriptive activity names to name the activities in the data set 
+#    and appropriately labels the data set with descriptive activity names.
 activities[, 2] = gsub("_", "", tolower(as.character(activities[, 2])))
 Y[,1] = activities[Y[,1], 2]
 names(Y) <- "activity"
  
 names(S) <- "subject"
-NewData <- cbind(S, Y, X)
+NewData <- cbind(S, Y, X)  # Cleaned Data
 
 # 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 uniqueSub = unique(S)[,1]

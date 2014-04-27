@@ -6,9 +6,12 @@ Here are the data for the project:
 
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
-### assuming that the folder "/UCI HAR Dataset" was downloaded, unzipped, and stored locally.
+### How to test
+* assuming that the folder "/UCI HAR Dataset" was downloaded, unzipped, and stored locally.
+* the file run_analysis.R takes the data from the UCIHAR Dataset and processes it (details below). 
+* To run the script , make sure working directory has the file run_analysis.R and the unzipped data folder /UCI HAR Dataset in it. Then source the file run_analysis.R locally.
 
-All the downloaded files were bounded to each other in Rstudio,  <strong> a full data set included 563 columns and 10229 rows</strong>. 
+All the raw data files were bounded to each other in Rstudio,  <strong> a full data set included 563 columns and 10229 rows</strong>. 
 
 Fixed some unusual features related to the variable names such as (), -, etc. 
 

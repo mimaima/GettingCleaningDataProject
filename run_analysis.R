@@ -26,11 +26,11 @@ S <- rbind(Strn, Stst)
 Y <- rbind(Ytrn, Ytst)
 
 # 3. Extracts only the measurements on the mean and standard deviation for each measurement. 
-t_features <- grep("_Mean\\(\\)|_Std\\(\\)", features[, 2])
+t_features <- grep("-mean\\(\\)|-std\\(\\)", features[, 2])
 X <- X[, t_features]
 names(X) <- features[t_features, 2]
 names(X) <- gsub("\\(|\\)", "", names(X))
-#names(X) <- tolower(names(X)) 
+names(X) <- tolower(names(X)) 
 
 # 4. Uses descriptive activity names to name the activities in the data set 
 #    and appropriately labels the data set with descriptive activity names.
@@ -41,20 +41,20 @@ names(S) <- "subject"
 NewData <- cbind(S, Y, X)  # Got Cleaned Data
 
 # 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-uniqueSub = unique(S)[,1]
+uSub = unique(S)[,1]
 numSub = length(unique(S)[,1])
 numAct = length(activities[,1])
 numCols = dim(NewData)[2]
 final = NewData[1:(numSub*numAct), ]
 
-row = 1
+r = 1  # row
 for (i in 1:numSub) {
 	for (j in 1:numAct) {
-		final[row, 1] = uniqueSub[i]
-		final[row, 2] = activities[j, 2]
-		tmp <- NewData[NewData$subject==i & NewData$activity==activities[j, 2], ]
-		final[row, 3:numCols] <- colMeans(tmp[, 3:numCols])
-		row = row+1
+		final[r, 1] = uSub[i]
+		final[r, 2] = activities[j, 2]
+		t <- NewData[NewData$subject==i & NewData$activity==activities[j, 2], ]
+		final[r, 3:numCols] <- colMeans(t[, 3:numCols])
+		r = r+1
 	}
 }
 # 6. Output the result

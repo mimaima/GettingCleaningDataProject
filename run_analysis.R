@@ -58,4 +58,4 @@ for (i in 1:numSub) {
 	}
 }
 # 6. Output the result
-write.table(final, "TidyDataSet_Average.txt")
+write.table(final, "TidyDataSet.txt")
